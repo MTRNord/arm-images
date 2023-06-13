@@ -1,4 +1,4 @@
-name: Publish Synapse Docker image
+name: Publish Synapse Docker image on release
 
 on:
   push:
