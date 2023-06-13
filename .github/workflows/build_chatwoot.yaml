@@ -53,6 +53,10 @@ jobs:
         run: |
           echo -en '\nENV CW_EDITION="ce"' >> chatwoot/docker/Dockerfile
 
+      - name: Fix Dockerfile
+        run: |
+          grep -v "RUN git rev-parse HEAD > /app/.git_sha" chatwoot/docker/Dockerfile > tmpfile && mv tmpfile chatwoot/docker/Dockerfile
+
       - name: Build and push
         id: build_and_push
         uses: docker/build-push-action@v4
