@@ -6,7 +6,7 @@ on:
       - "main"
     paths:
       - "chatwoot/**"
-      - ".github/**"
+      - ".github/workflows/build_chatwoot.yaml"
   workflow_dispatch:
 
 jobs:

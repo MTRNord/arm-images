@@ -6,7 +6,7 @@ on:
       - "main"
     paths:
       - "synapse/**"
-      - ".github/**"
+      - ".github/workflows/build_synapse.yaml"
   workflow_dispatch:
 
 jobs:

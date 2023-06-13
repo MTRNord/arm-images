@@ -6,7 +6,7 @@ on:
       - synapse-**
     paths:
       - "synapse/**"
-      - ".github/**"
+      - ".github/workflows/build_synapse_release.yaml"
   workflow_dispatch:
 
 jobs:
