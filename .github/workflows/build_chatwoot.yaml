@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - "main"
+    paths:
+      - "chatwoot/**"
+      - ".github/**"
   workflow_dispatch:
 
 jobs:

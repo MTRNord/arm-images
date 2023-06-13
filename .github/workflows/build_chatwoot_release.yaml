@@ -1,9 +1,12 @@
-name: Publish Synapse Docker image on release
+name: Publish chatwoot Docker image on release
 
 on:
   push:
     tags:
-      - synapse-**
+      - chatwoot-**
+    paths:
+      - "chatwoot/**"
+      - ".github/**"
   workflow_dispatch:
 
 jobs:
@@ -12,7 +15,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    name: Push synapse image to repo
+    name: Push chatwoot image to repo
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo

@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - synapse-**
+    paths:
+      - "synapse/**"
+      - ".github/**"
   workflow_dispatch:
 
 jobs:
