@@ -33,7 +33,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Docker meta
-        id: meta
+        id: docker_meta
         uses: docker/metadata-action@v4
         with:
           images: coreharbor.kubernetes.midnightthoughts.space/matrixdotorg/synapse
