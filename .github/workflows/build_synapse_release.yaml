@@ -40,6 +40,7 @@ jobs:
           tags: type=sha,format=long
 
       - name: Build and push
+        id: build_and_push
         uses: docker/build-push-action@v4
         with:
           push: true
@@ -50,6 +51,6 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
       - name: Sign the images with GitHub OIDC Token
         env:
-          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+          DIGEST: ${{ steps.build_and_push.outputs.digest }}
           TAGS: ${{ steps.docker_meta.outputs.tags }}
         run: cosign sign --yes "${TAGS}@${DIGEST}"
