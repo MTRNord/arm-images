@@ -1,9 +1,9 @@
-name: Publish Synapse Docker image on release
+name: Publish Chatwoot Docker image
 
 on:
   push:
-    tags:
-      - synapse-**
+    branches:
+      - "main"
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    name: Push synapse image to repo
+    name: Push chatwoot image to repo
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -38,19 +38,30 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: coreharbor.kubernetes.midnightthoughts.space/matrixdotorg/synapse
+          images: coreharbor.kubernetes.midnightthoughts.space/chatwoot/chatwoot
           tags: type=sha,format=long
+
+      - name: Strip enterprise code
+        run: |
+          rm -rf chatwoot/enterprise
+          rm -rf chatwoot/spec/enterprise
+
+      - name: Set Chatwoot edition
+        run: |
+          echo -en '\nENV CW_EDITION="ce"' >> chatwoot/docker/Dockerfile
 
       - name: Build and push
         id: build_and_push
         uses: docker/build-push-action@v4
         with:
           push: true
-          context: synapse
+          context: chatwoot
+          file: chatwoot/docker/Dockerfile
           sbom: true
           provenance: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.docker_meta.outputs.tags }}
+
       - name: Sign the images with GitHub OIDC Token
         env:
           DIGEST: ${{ steps.build_and_push.outputs.digest }}
